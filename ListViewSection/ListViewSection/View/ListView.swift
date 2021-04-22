@@ -10,10 +10,10 @@ import SwiftUI
 struct TestData: Identifiable {
     let id = UUID()
     let title: String
-    let items: [String]
+    let items: [Int]
     
     static let datas: [TestData] = [
-        TestData(title: "AAA", items: ["1","2","3"])
+        TestData(title: "AAA", items: [1,2,3,4,5,6,7,8,9])
     ]
 }
 
@@ -27,40 +27,54 @@ struct ListView: View {
     
     let myGroups = TestData.datas
     
+    let x = [1,2,3,4,5,6,7,8,9]
+    
     var body: some View {
+        
+        let total = x.reduce(0, +)
+        
         List {
             ForEach(myGroups) { group in
                 Section(
                     header:
                         HStack {
-                            Text("xxx")
-                                .background(Color.red)
+                            Text("Job ID")
                                 .frame(minWidth: 0, maxWidth: .infinity)
                             
-                            Text("xxx")
-                                .background(Color.yellow)
+                            Text("Amount")
                                 .frame(minWidth: 0, maxWidth: .infinity)
                             
-                            Text("xxx")
-                                .background(Color.green)
+                            Text("Received")
+                                .frame(minWidth: 0, maxWidth: .infinity)
+                        }
+                        .padding()
+                    ,
+                    footer:
+                        HStack {
+                            Text("Total")
+                                .frame(minWidth: 0, maxWidth: .infinity)
+                            
+                            Text("")
+                                .frame(minWidth: 0, maxWidth: .infinity)
+                            
+                            
+                            Text("\(total)")
                                 .frame(minWidth: 0, maxWidth: .infinity)
                         }
                 ) {
                     ForEach(group.items, id: \.self) { item in
                         HStack() {
-                            Text(item)
-                                .background(Color.red)
+                            Text("\(item)")
                                 .frame(minWidth: 0, maxWidth: .infinity)
                             
-                            Text(item)
-                                .background(Color.yellow)
+                            Text("\(item)")
                                 .frame(minWidth: 0, maxWidth: .infinity)
                             
-                            Text(item)
-                                .background(Color.green)
+                            Text("\(item)")
                                 .frame(minWidth: 0, maxWidth: .infinity)
                         }
-                        .background(Color.yellow)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
                     }
                 }
                 
